@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="qrcode.js">
+</script>
+    <script type="text/javascript" src="html5-qrcode.js">
+</script>
+    <title>
+      QRCode Generator Example
+    </title>
+    <style type="text/css" media="screen">
+      body { text-align:center; }
+    </style>
+  </head>
+  <body>
+    <h1>
+    </h1>
+	<div id="txt"></div>
+    
+    <!-- This is where our QRCode will appear in. -->
+    <div id="qrcode"></div>
+    
+    <script type="text/javascript">
+      function updateQRCode(text) {
+
+        var element = document.getElementById("qrcode");
+
+        var bodyElement = document.body;
+        if(element.lastChild)
+          element.replaceChild(showQRCode(text), element.lastChild);
+        else
+          element.appendChild(showQRCode(text));
+
+      }
+	  
+	  function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+	  
+	  async function showtime() {
+	    while (true) {
+		  time = (Date.now() % 1000000);
+		  time_square = (time % 100) * (time % 100)
+		  time1 = time + " " + time_square;
+		  document.getElementById('txt').innerHTML = time+"";
+		  updateQRCode(time1);
+		  await sleep(10);
+	    }
+	  }
+
+	  showtime();
+	  
+    </script>
+  </body>
+</html>
